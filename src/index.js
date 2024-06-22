@@ -1,19 +1,18 @@
 import express from "express";
 
-import {pool} from './db.js'
+import iosRouter from "./routes/tecnologias/Ios/ios.routes.js";
+import androidRouter from "./routes/tecnologias/Android/android.routes.js"
+import backendRouter from "./routes/tecnologias/Backend/backend.routes.js"
+import indexRouter from "./routes/otros/index.routes.js"
 
 const app = express()
 
-app.get("/ping", async(req, res) => {
-    const [result] = await pool.query("SELECT 1 + 1 AS result")
-    res.json(result[0])
-})
 
-app.get("/Ios", (req,res) => res.send('Obteniendo los proyectos ios'))
+app.use(indexRouter)
+app.use(iosRouter)
+app.use(androidRouter)
+app.use(backendRouter)
 
-app.get("/Ios", (req,res) => res.send('Obteniendo los proyectos ios'))
-
-app.get("/Ios", (req,res) => res.send('Obteniendo los proyectos ios'))
 
 
 app.listen(3000)
